@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:zoodex/blocs/Location_Provider.dart';
+import 'package:zoodex/controllers/location_controller.dart';
 import 'package:zoodex/services/icon_getter.dart';
 import 'package:zoodex/widgets/map_picker.dart';
 
@@ -16,7 +16,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         padding: const EdgeInsets.only(left: 13.0, right: 7),
         child: IconWidget(
           iconKey: 'zoodexIcon',
-          iconUrl: 'https://beta.zoodex.ir/svg/zoodex-logo.svg',
+          iconUrl: 'https://zoodex.ir/svg/zoodex-logo.svg',
           size: 30,
         ),
       ),

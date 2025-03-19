@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:zoodex/blocs/discounts_provider.dart';
+import 'package:zoodex/controllers/discount_controller.dart';
 import 'package:zoodex/utils/theme.dart';
 
 class Discounts extends StatelessWidget {
@@ -8,7 +8,8 @@ class Discounts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dicountsProvider = Provider.of<DicountsProvider>(context);
+    final discountController = Provider.of<DiscountController>(context);
+
     return Row(
       children: [
         Expanded(
@@ -18,17 +19,17 @@ class Discounts extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 16, top: 16),
                 child: SizedBox(
                   height: 50,
-                  child: dicountsProvider.items.isEmpty
+                  child: discountController.items.isEmpty
                       ? const Center(child: CircularProgressIndicator())
                       : Directionality(
                           textDirection: TextDirection.rtl,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount: dicountsProvider.items.length,
+                            itemCount: discountController.items.length,
                             itemBuilder: (context, index) {
-                              final item = dicountsProvider.items[index];
+                              final item = discountController.items[index];
                               return Container(
-                                margin: EdgeInsets.only(left: 8),
+                                margin: const EdgeInsets.only(left: 8),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(14),
                                   color: AppTheme.secondryColor,
@@ -36,10 +37,9 @@ class Discounts extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 8, top: 8, bottom: 8, left: 8),
+                                      padding: const EdgeInsets.all(8),
                                       child: Image.network(
-                                        item['iconUrl']!,
+                                        item.iconUrl,
                                         alignment: Alignment.centerRight,
                                       ),
                                     ),
@@ -52,13 +52,13 @@ class Discounts extends StatelessWidget {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            item['title']!,
+                                            item.title,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headlineLarge,
                                           ),
                                           Text(
-                                            item['iconKey']!,
+                                            item.iconKey,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .labelMedium,

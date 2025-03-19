@@ -14,6 +14,12 @@ class SearchBox extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: TextField(
+              onSubmitted: (value) {
+                FocusScope.of(context).unfocus();
+              },
+              onEditingComplete: () {
+                FocusScope.of(context).unfocus();
+              },
               textAlign: TextAlign.right,
               textDirection: TextDirection.rtl,
               decoration: InputDecoration(
@@ -31,7 +37,7 @@ class SearchBox extends StatelessWidget {
                   borderSide: BorderSide(color: Color(0xFF5F6266), width: 1),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(18),
                   borderSide:
                       BorderSide(color: AppTheme.primaryColor, width: 2.5),
                 ),

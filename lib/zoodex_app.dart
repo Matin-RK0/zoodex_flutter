@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:zoodex/blocs/Location_Provider.dart';
-import 'package:zoodex/blocs/bottom_nav_provider.dart';
-import 'package:zoodex/blocs/category_provider.dart';
-import 'package:zoodex/blocs/discounts_provider.dart';
-import 'package:zoodex/blocs/drawer_provider.dart';
-import 'package:zoodex/blocs/foods_provider.dart';
-import 'package:zoodex/blocs/shops_card_provider.dart';
+import 'package:zoodex/controllers/banner_controller.dart';
+import 'package:zoodex/controllers/location_controller.dart';
+import 'package:zoodex/controllers/discount_controller.dart';
+import 'package:zoodex/controllers/foods_controller.dart';
+import 'package:zoodex/controllers/shops_card_controller.dart';
+import 'package:zoodex/controllers/bottom_nav_controller.dart';
+import 'package:zoodex/controllers/category_controller.dart';
+import 'package:zoodex/controllers/drawer_controller.dart';
 import 'package:zoodex/services/icon_getter.dart';
-import 'package:zoodex/blocs/parallelwords_provider.dart';
+import 'package:zoodex/controllers/parallel_worlds_controller.dart';
 import 'package:zoodex/utils/theme.dart';
-import 'package:zoodex/widgets/main_screen.dart';
+import 'package:zoodex/pages/main_screen.dart';
 
 class ZoodexApp extends StatelessWidget {
   const ZoodexApp({super.key});
@@ -20,14 +21,17 @@ class ZoodexApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => IconProvider()),
-        ChangeNotifierProvider(create: (_) => CategoryProvider()),
-        ChangeNotifierProvider(create: (_) => DrawerProvider()),
+        ChangeNotifierProvider(
+            create: (_) => CategoryController()..fetchCategories()),
+        ChangeNotifierProvider(create: (_) => ShopsCardController()),
+        ChangeNotifierProvider(create: (_) => CustomDrawerController()),
         ChangeNotifierProvider(create: (_) => LocationProvider()),
-        ChangeNotifierProvider(create: (_) => ParallelWords()),
-        ChangeNotifierProvider(create: (_) => DicountsProvider()),
-        ChangeNotifierProvider(create: (_) => FoodsProvider()),
-        ChangeNotifierProvider(create: (context) => ShopsCardProvider()..fetchShopsCard()),
-        ChangeNotifierProvider(create: (context) => BottomNavProvider()),
+        ChangeNotifierProvider(create: (_) => ParallelWorldsController()),
+        ChangeNotifierProvider(create: (_) => DiscountController()),
+        ChangeNotifierProvider(create: (_) => FoodsController()),
+        ChangeNotifierProvider(create: (_) => BottomNavController()),
+        ChangeNotifierProvider(
+            create: (context) => BannerProvider()..loadBanners()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class DrawerProvider extends ChangeNotifier {
+class CustomDrawerController extends ChangeNotifier {
   String _selectedItem = '';
   bool _isDrawerOpen = false;
 

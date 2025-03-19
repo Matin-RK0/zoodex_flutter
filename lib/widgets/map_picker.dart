@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
-import 'package:zoodex/blocs/Location_Provider.dart';
+import 'package:zoodex/controllers/location_controller.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:zoodex/utils/theme.dart';
 

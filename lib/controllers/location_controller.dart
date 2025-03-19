@@ -4,20 +4,18 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
 class LocationProvider with ChangeNotifier {
-  LatLng _selectedLocation = LatLng(35.6892, 51.3890); // تهران (موقعیت پیش‌فرض)
+  LatLng _selectedLocation = LatLng(35.6892, 51.3890);
   String _address = "کرمان";
 
   LatLng get selectedLocation => _selectedLocation;
   String get address => _address;
 
-  /// متد برای تغییر موقعیت
   Future<void> updateLocation(LatLng newLocation) async {
     _selectedLocation = newLocation;
     _address = await _convertLatLngToAddress(newLocation);
-    notifyListeners(); // اطلاع‌رسانی به ویجت‌های مرتبط
+    notifyListeners();
   }
 
-  /// دریافت موقعیت فعلی کاربر و به‌روزرسانی مختصات و آدرس
   Future<void> getCurrentLocation() async {
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
@@ -33,7 +31,7 @@ class LocationProvider with ChangeNotifier {
     await updateLocation(LatLng(position.latitude, position.longitude));
   }
 
-  /// تبدیل مختصات به آدرس خوانا
+  
   Future<String> _convertLatLngToAddress(LatLng location) async {
     try {
       List<Placemark> placemarks = await placemarkFromCoordinates(
